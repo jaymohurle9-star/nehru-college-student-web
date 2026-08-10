@@ -1348,14 +1348,18 @@
         import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
         import { getFirestore, doc, setDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyCR1xCH84VkL6GGzjnSKIffRfLaN1BXsmQ",
-            authDomain: "yuva-shakti-campaign.firebaseapp.com",
-            projectId: "yuva-shakti-campaign",
-            storageBucket: "yuva-shakti-campaign.firebasestorage.app",
-            messagingSenderId: "383342321588",
-            appId: "1:383342321588:web:8abfcf3cad95adf88b9ce1"
-        };
+        const firebaseConfig ={
+  apiKey: "AIzaSyCxPKdS32g2h6TvtnL8Y0_1QaIEQ2YwGjg",
+  authDomain: "nehru-college-3a6a4.firebaseapp.com",
+  databaseURL: "https://nehru-college-3a6a4-default-rtdb.firebaseio.com",
+  projectId: "nehru-college-3a6a4",
+  storageBucket: "nehru-college-3a6a4.firebasestorage.app",
+  messagingSenderId: "111663173049",
+  appId: "1:111663173049:web:7bb82972aa6c58e334ba68",
+  measurementId: "G-HXS38WFVPN"
+};
+            
+        
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
