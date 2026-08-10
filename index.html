@@ -1409,32 +1409,79 @@
                 });
         };
 
-        // Verify OTP & Save Data
-        window.verifyOTP = function() {
-            const otp = document.getElementById("otpInput").value.trim();
-            const regStatus = document.getElementById("regStatus");
+        // 1. Send OTP Function
+window.sendOTP = function() {
+    const name = document.getElementById("regFullName").value.trim();
+    const role = document.getElementById("regRole").value;
+    const phone = document.getElementById("regPhone").value.trim();
+    const regStatus = document.getElementById("regStatus");
 
-            if(otp.length !== 6) {
-                regStatus.style.color = "red";
-                regStatus.innerText = "६ अंकी बरोबर OTP टाका.";
-                return;
-            }
+    if(!name || !role || phone.length !== 10) {
+        regStatus.style.color = "red";
+        regStatus.innerText = "कृपया नाव, भूमिका व १० अंकी मोबाईल नंबर पूर्ण भरा.";
+        return;
+    }
 
-            regStatus.style.color = "orange";
-            regStatus.innerText = "OTP तपासला जात आहे...";
+    const formatPhone = "+91" + phone;
+    const appVerifier = window.recaptchaVerifier;
 
-            confirmationResultObj.confirm(otp).then((result) => {
-                saveUserData(result.user.uid);
+    regStatus.style.color = "orange";
+    regStatus.innerText = "OTP पाठवला जात आहे...";
+
+    // OTP इनपुट सेक्शन लगेच उघडा (एरर आला तरी वापरकर्त्याला चाचणी करता यावी)
+    document.getElementById("otpSection").style.display = "block";
+
+    if (window.signInWithPhoneNumber && auth) {
+        signInWithPhoneNumber(auth, formatPhone, appVerifier)
+            .then((confirmationResult) => {
+                confirmationResultObj = confirmationResult;
+                regStatus.style.color = "green";
+                regStatus.innerText = "OTP मोबाईलवर पाठवण्यात आला आहे!";
+                document.getElementById("sendOtpBtn").style.display = "none";
             }).catch((error) => {
-                // Fallback for testing mode if OTP direct bypass is allowed
-                if(otp === "123456") {
-                    saveUserData("test_user_" + Date.now());
-                } else {
-                    regStatus.style.color = "red";
-                    regStatus.innerText = "चुकीचा OTP! कृपया अचूक कोड टाका.";
-                }
+                regStatus.style.color = "orange";
+                regStatus.innerText = "SMS पाठवण्यात अडचण आली. चाचणीसाठी '123456' OTP वापरा आणि 'OTP तपासा' दाबा.";
             });
-        };
+    } else {
+        regStatus.style.color = "orange";
+        regStatus.innerText = "चाचणी मोड: '123456' OTP टाका आणि 'OTP तपासा' दाबा.";
+    }
+};
+
+// 2. Verify OTP Function
+window.verifyOTP = function() {
+    const otp = document.getElementById("otpInput").value.trim();
+    const regStatus = document.getElementById("regStatus");
+
+    if(otp.length !== 6) {
+        regStatus.style.color = "red";
+        regStatus.innerText = "६ अंकी बरोबर OTP टाका.";
+        return;
+    }
+
+    regStatus.style.color = "orange";
+    regStatus.innerText = "OTP तपासला जात आहे...";
+
+    // १. जर चाचणी OTP (123456) टाकला असेल तर थेट सेव्ह करा
+    if (otp === "123456") {
+        saveUserData("test_user_" + Date.now());
+        return;
+    }
+
+    // २. जर खरा SMS OTP आला असेल तर रिअल व्हेरिफिकेशन करा
+    if (confirmationResultObj) {
+        confirmationResultObj.confirm(otp).then((result) => {
+            saveUserData(result.user.uid);
+        }).catch((error) => {
+            regStatus.style.color = "red";
+            regStatus.innerText = "चुकीचा OTP! कृपया अचूक कोड टाका.";
+        });
+    } else {
+        regStatus.style.color = "red";
+        regStatus.innerText = "अवैध OTP! चाचणीसाठी 123456 वापरा.";
+    }
+};
+                        
 
         function saveUserData(uid) {
             const name = document.getElementById("regFullName").value.trim();
