@@ -1,0 +1,1774 @@
+```html
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>युवा शक्ती मोहीम - नेहरू शिक्षण संस्था महाविद्यालय, नेर-परसोपंत</title>
+    <!-- FontAwesome Icons, html2canvas & Canvas Confetti -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --primary: #1E293B;
+            --saffron: #D97706;
+            --saffron-hover: #B45309;
+            --border: #E2E8F0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0F172A;
+            --card-bg: #1E293B;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --primary: #F8FAFC;
+            --saffron: #F59E0B;
+            --saffron-hover: #D97706;
+            --border: #334155;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 50px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* Header Navigation */
+        header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .header-left, .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: 0.2s;
+            position: relative;
+        }
+
+        .icon-btn:hover {
+            background: var(--border);
+        }
+
+        .badge-dot {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            background-color: #EF4444;
+            border-radius: 50%;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-container input {
+            padding: 8px 14px 8px 34px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--bg-color);
+            color: var(--text-main);
+            font-size: 14px;
+            width: 170px;
+            transition: 0.3s;
+        }
+
+        .search-container input:focus {
+            width: 220px;
+            outline: none;
+            border-color: var(--saffron);
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .btn-saffron {
+            background-color: var(--saffron);
+            color: #FFFFFF;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+        }
+
+        .btn-saffron:hover {
+            background-color: var(--saffron-hover);
+        }
+
+        /* 3-Dot Dropdown Popup */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            border-radius: var(--radius);
+            width: 230px;
+            z-index: 1100;
+        }
+
+        .dropdown-menu ul {
+            list-style: none;
+        }
+
+        .dropdown-menu li {
+            padding: 12px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+            transition: 0.2s;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dropdown-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-menu li:hover {
+            background: var(--bg-color);
+            color: var(--saffron);
+        }
+
+        /* Navigation Tabs */
+        nav.nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0 10px;
+            gap: 5px;
+            scrollbar-width: none;
+        }
+
+        nav.nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-tab {
+            padding: 12px 16px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: 0.2s;
+        }
+
+        .nav-tab.active {
+            color: var(--saffron);
+            border-bottom-color: var(--saffron);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Page 1 - Hero Header */
+        .school-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .school-logo {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--saffron);
+            background: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: var(--saffron);
+            flex-shrink: 0;
+        }
+
+        .school-info h1 {
+            font-size: 20px;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .school-info p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .martyrs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .martyr-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            text-align: center;
+        }
+
+        .martyr-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 2px solid var(--saffron);
+        }
+
+        .martyr-card h3 {
+            color: var(--saffron);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .campaign-banner {
+            background: linear-gradient(135deg, rgba(217, 119, 6, 0.1), rgba(30, 41, 59, 0.05));
+            border-left: 5px solid var(--saffron);
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .campaign-banner h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--saffron);
+        }
+
+        .campaign-banner p {
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* Page 2 - Groups */
+        .group-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .group-card {
+            border-top: 5px solid var(--saffron);
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .group-card h3 {
+            color: var(--saffron);
+            font-size: 18px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .group-card .task {
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .member-list {
+            max-height: 280px;
+            overflow-y: auto;
+            font-size: 13px;
+        }
+
+        .member-item {
+            padding: 8px;
+            border-bottom: 1px dashed var(--border);
+            background: var(--bg-color);
+            border-radius: 6px;
+            margin-bottom: 6px;
+        }
+
+        .member-item strong {
+            display: block;
+            color: var(--text-main);
+        }
+
+        /* Page 3 - Biographies */
+        .bio-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        @media (min-width: 768px) {
+            .bio-section {
+                flex-direction: row;
+            }
+        }
+
+        .bio-img {
+            width: 100%;
+            max-width: 220px;
+            height: 260px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            border: 3px solid var(--saffron);
+            flex-shrink: 0;
+        }
+
+        .bio-info h2 {
+            font-size: 22px;
+            color: var(--saffron);
+            margin-bottom: 8px;
+        }
+
+        .quote-box {
+            background: var(--bg-color);
+            border-left: 4px solid var(--saffron);
+            padding: 12px 16px;
+            margin: 12px 0;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        /* Page 4 - History Timeline */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .history-card {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .history-card {
+                flex-direction: row;
+            }
+        }
+
+        .history-img {
+            width: 100%;
+            max-width: 280px;
+            height: 190px;
+            object-fit: cover;
+            border-radius: var(--radius);
+        }
+
+        .history-desc .date-badge {
+            background: var(--saffron);
+            color: #FFF;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        /* Page 5 - Photo Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .gallery-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            height: 180px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .fab-add {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--saffron);
+            color: #fff;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 900;
+        }
+
+        /* Page 7 - College Info Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 14px;
+            margin-bottom: 24px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #FFFFFF;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--bg-color);
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 15px;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 500px;
+            border-radius: var(--radius);
+            padding: 24px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-color);
+            color: var(--text-main);
+            font-size: 14px;
+        }
+
+        /* ID Card Modal Styling */
+        .id-card-wrap {
+            width: 320px;
+            height: 480px;
+            margin: 0 auto 16px;
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            background: #1E293B;
+            border: 3px solid var(--saffron);
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .id-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95));
+            z-index: 1;
+        }
+
+        .id-body {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .id-body img.user-photo {
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--saffron);
+            margin: 12px auto;
+        }
+
+        .id-badge-role {
+            background: var(--saffron);
+            color: #FFF;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .status-msg {
+            font-size: 13px;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        .completed-banner-box {
+            background: linear-gradient(135deg, #059669, #10B981);
+            color: #FFF;
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            margin-bottom: 20px;
+            display: none;
+            box-shadow: var(--shadow);
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <!-- Header Bar -->
+    <header>
+        <div class="header-left">
+            <button class="icon-btn" onclick="toggleDropdown()" title="मेनू"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="शोधा..." onclick="openModal('booksSearchModal')">
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="icon-btn" onclick="openModal('updatesModal')" title="सूचना">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge-dot"></span>
+            </button>
+            <button class="btn-saffron" onclick="openModal('registerModal')"><i class="fa-solid fa-user-plus"></i> रजिस्ट्रेशन</button>
+        </div>
+    </header>
+
+    <!-- 3-Dot Dropdown Menu -->
+    <div id="dropdownMenu" class="dropdown-menu">
+        <ul>
+            <li onclick="showMyGroup()"><i class="fa-solid fa-users-viewfinder"></i> १. तुमचा गट</li>
+            <li onclick="showMyIdCard()"><i class="fa-solid fa-id-card"></i> २. तुमचे आयडेंटी कार्ड</li>
+            <li onclick="openModal('complaintModal')"><i class="fa-solid fa-circle-exclamation"></i> ३. अडचण / तक्रार</li>
+            <li onclick="toggleDarkMode()"><i class="fa-solid fa-moon"></i> ४. डार्क / लाईट मोड</li>
+            <li id="adminMenuOption" style="display: none;" onclick="openModal('adminModal')"><i class="fa-solid fa-user-gear" style="color:var(--saffron);"></i> ५. ॲडमिन पॅनल</li>
+        </ul>
+    </div>
+
+    <!-- Page Navigation Tabs -->
+    <nav class="nav-tabs">
+        <button class="nav-tab active" onclick="switchPage(1)">पेज १: मुख्य</button>
+        <button class="nav-tab" onclick="switchPage(2)">पेज २: गट</button>
+        <button class="nav-tab" onclick="switchPage(3)">पेज ३: जीवन चरित्र</button>
+        <button class="nav-tab" onclick="switchPage(4)">पेज ४: ऐतिहासिक फोटो</button>
+        <button class="nav-tab" onclick="switchPage(5)">पेज ५: फोटो गॅलरी</button>
+        <button class="nav-tab" onclick="switchPage(7)">पेज ७: महाविद्यालय माहिती</button>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="container">
+
+        <!-- Completion Victory Banner -->
+        <div id="campaignCompletedBanner" class="completed-banner-box">
+            <h2 id="completedTitleText">🎉 मोहीम यशस्वीरीत्या पूर्ण झाली!</h2>
+            <p style="margin-top:6px;">महाविद्यालयात हुतात्मा भगतसिंग, राजगुरू व सुखदेव यांच्या मूर्ती स्थापनेचे स्वप्न पूर्ण झाले आहे!</p>
+            <img id="completedPhotoDisplay" src="" style="max-width: 100%; max-height: 280px; object-fit: cover; border-radius: 8px; margin-top: 12px; display: none; border: 3px solid #FFF;">
+        </div>
+
+        <!-- ================= PAGE 1 ================= -->
+        <div id="page1" class="page active">
+            <div class="card">
+                <div class="school-header">
+                    <div class="school-logo" id="schoolLogoDisplay">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div class="school-info">
+                        <h1 id="schoolNameText">नेहरू शिक्षण संस्था संचलित, महाविद्यालय नेर-परसोपंत</h1>
+                        <p id="schoolSubtext">जि. यवतमाळ | स्वातंत्र्यवीरांच्या विचारांचा वसा आणि वारसा</p>
+                    </div>
+                </div>
+
+                <h2 style="text-align: center; color: var(--saffron); font-size: 20px; margin-top: 10px;">वीर हुतात्मे: क्रांतीचे तीन आधारस्तंभ</h2>
+                <div class="martyrs-container">
+                    <div class="martyr-card">
+                        <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=600&auto=format&fit=crop" alt="[भगतसिंग फोटो]">
+                        <h3>शहीद भगतसिंग</h3>
+                        <p style="font-size:13px; color:var(--text-muted);">"इंकलाब झिंदाबाद!"</p>
+                    </div>
+                    <div class="martyr-card">
+                        <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?q=80&w=600&auto=format&fit=crop" alt="[शिवराम राजगुरू फोटो]">
+                        <h3>शहीद शिवराम राजगुरू</h3>
+                        <p style="font-size:13px; color:var(--text-muted);">"मातृभूमीसाठी आत्मसमर्पण!"</p>
+                    </div>
+                    <div class="martyr-card">
+                        <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600&auto=format&fit=crop" alt="[सुखदेव थापर फोटो]">
+                        <h3>शहीद सुखदेव थापर</h3>
+                        <p style="font-size:13px; color:var(--text-muted);">"अमर क्रांतीचा धगधगता श्वास!"</p>
+                    </div>
+                </div>
+
+                <div class="campaign-banner">
+                    <h2 id="heroCampaignTitle">🚩 युवा शक्ती मोहीम - संकल्प आणि उद्दिष्ट</h2>
+                    <p id="heroCampaignDesc">
+                        नेहरू शिक्षण संस्था संचलित महाविद्यालय नेर-परसोपंत येथे **शहीद भगतसिंग, शिवराम राजगुरू आणि सुखदेव** या त्रिमूर्तींचे स्मारक व पूर्णकृती मूर्ती स्थापन करणे हा या मोहिमेचा मुख्य उद्देश आहे. महाविद्यालयाचे प्राचार्य, कार्यकारणी मंडळ व शासनाकडून आवश्यक परवानगी व जागा मिळवून भव्य मूर्ती स्थापन करण्यासाठी सर्व विद्यार्थी, शिक्षक व कर्मचाऱ्यांनी संघटित होण्याचे हे पाऊल आहे.
+                    </p>
+                    <button class="btn-saffron" style="margin: 0 auto;" onclick="openModal('registerModal')"><i class="fa-solid fa-flag"></i> युवाशक्तीला जोडा (मोहिमेत सहभागी व्हा)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 2 ================= -->
+        <div id="page2" class="page">
+            <div class="card">
+                <h2 style="color:var(--saffron); margin-bottom: 6px;"><i class="fa-solid fa-users-rectangle"></i> मोहिमेतील कार्यात्मक गट (Groups)</h2>
+                <p style="color:var(--text-muted); font-size:14px; margin-bottom: 20px;">नोंदणी केलेल्या प्रत्येक सदस्याला त्याच्या वर्ग व भूमिकेनुसार आपोआप गटात समाविष्ट केले जाते.</p>
+
+                <div class="group-grid">
+                    <!-- Group A -->
+                    <div class="group-card">
+                        <h3><i class="fa-solid fa-bullhorn"></i> 'अ' गट: युवा शक्ती दूत</h3>
+                        <div class="task">गटाचे कार्य: मोहिमेचा प्रचार व प्रसार करणे (इयत्ता ११ वी व १२ वी विद्यार्थी)</div>
+                        <div class="member-list" id="groupAList">
+                            <!-- Dynamic rendering -->
+                        </div>
+                    </div>
+
+                    <!-- Group B -->
+                    <div class="group-card">
+                        <h3><i class="fa-solid fa-file-signature"></i> 'ब' गट: युवा शक्ती अर्जदार</h3>
+                        <div class="task">गटाचे कार्य: मूर्ती स्थापनेसाठी जागा व परवानगी मिळवणे (पदवी पदव्युत्तर विद्यार्थी)</div>
+                        <div class="member-list" id="groupBList">
+                            <!-- Dynamic rendering -->
+                        </div>
+                    </div>
+
+                    <!-- Group C -->
+                    <div class="group-card">
+                        <h3><i class="fa-solid fa-user-tie"></i> 'क' गट: युवा शक्ती मार्गदर्शक</h3>
+                        <div class="task">गटाचे कार्य: मार्गदर्शन करणे (प्राध्यापक व शिक्षक वृंद)</div>
+                        <div class="member-list" id="groupCList">
+                            <!-- Dynamic rendering -->
+                        </div>
+                    </div>
+
+                    <!-- Group D -->
+                    <div class="group-card">
+                        <h3><i class="fa-solid fa-handshake"></i> 'ड' गट: सहकार्य समिती</h3>
+                        <div class="task">गटाचे कार्य: मोहिमेला इतर सर्व प्रकारचे सहकार्य करणे (इतर व नागरिक)</div>
+                        <div class="member-list" id="groupDList">
+                            <!-- Dynamic rendering -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 3 ================= -->
+        <div id="page3" class="page">
+            <div class="card">
+                <h1 style="color:var(--saffron); text-align:center; margin-bottom:24px;">वीर क्रांतीकारकांचे संपूर्ण जीवन चरित्र</h1>
+
+                <!-- Bhagat Singh -->
+                <div class="bio-section">
+                    <img class="bio-img" src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=600&auto=format&fit=crop" alt="[भगतसिंग चित्र]">
+                    <div class="bio-info">
+                        <h2>शहीद भगतसिंग</h2>
+                        <p><strong>जन्म:</strong> २८ सप्टेंबर १९०७ (बंगा, पंजाब) | <strong>बलिदान:</strong> २३ मार्च १९३१ (लाहोर)</p>
+                        <div class="quote-box">"व्यक्तीचा खून करणे सोपे आहे, पण विचारांचा खून तुम्ही करू शकत नाही." - भगतसिंग</div>
+                        <p style="font-size:14px; color:var(--text-main);">
+                            भगतसिंग हे भारतीय स्वातंत्र्यलढ्यातील प्रखर विचारवंत आणि क्रांतीकारक होते. लंडन असेंब्लीत बॉम्ब फेकून त्यांनी इंग्रजांच्या बहिऱ्या कानांना भारताचा आवाज ऐकवला. लाहोर कटात व वयाच्या अवघ्या २३ व्या वर्षी त्यांनी हसतमुखाने फाशीचा फंद स्वीकारला.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Rajguru -->
+                <div class="bio-section">
+                    <img class="bio-img" src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?q=80&w=600&auto=format&fit=crop" alt="[राजगुरू चित्र]">
+                    <div class="bio-info">
+                        <h2>शहीद शिवराम हरी राजगुरू</h2>
+                        <p><strong>जन्म:</strong> २४ ऑगस्ट १९०८ (खेड, पुणे, महाराष्ट्र) | <strong>बलिदान:</strong> २३ मार्च १९३१</p>
+                        <div class="quote-box">"मातृभूमीच्या मुक्ततेसाठी रक्ताचा शेवटचा थेंबही अर्पण करणे हेच आमचे कर्तव्य आहे."</div>
+                        <p style="font-size:14px; color:var(--text-main);">
+                            शिवराम राजगुरू हे महाराष्ट्राचे सुपुत्र आणि निष्णात निशाणेबाज होते. सांडर्सच्या वधाच्या वेळी भगतसिंगांसोबत त्यांनी धाडसी कारवाई केली. हिंदुस्थान सोशलिस्ट रिपब्लिकन असोसिएशनचे ते प्रमुख सदस्य होते.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Sukhdev -->
+                <div class="bio-section">
+                    <img class="bio-img" src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600&auto=format&fit=crop" alt="[सुखदेव चित्र]">
+                    <div class="bio-info">
+                        <h2>शहीद सुखदेव थापर</h2>
+                        <p><strong>जन्म:</strong> १५ मे १९०७ (लुधियाना, पंजाब) | <strong>बलिदान:</strong> २३ मार्च १९३१</p>
+                        <div class="quote-box">"आमचा त्याग व्यर्थ जाणार नाही, तर तो येणाऱ्या पिढ्यांसाठी क्रांतीची मशाल बनेल."</div>
+                        <p style="font-size:14px; color:var(--text-main);">
+                            सुखदेव थापर हे कुशल संघटक आणि रणनीतिकार होते. नौजवान भारत सभेची स्थापना करण्यात त्यांचा मोठा वाटा होता. २३ मार्च १९३१ रोजी भगतसिंग, राजगुरू आणि सुखदेव या तिघांना लाहोर मध्यवर्ती कारागृहात एकत्र फाशी देण्यात आली.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 4 ================= -->
+        <div id="page4" class="page">
+            <div class="card">
+                <h2 style="color:var(--saffron); margin-bottom: 20px;"><i class="fa-solid fa-clock-rotate-left"></i> ऐतिहासिक दुर्मिळ छायाचित्रे</h2>
+                <div class="history-list">
+                    <div class="history-card">
+                        <img class="history-img" src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=600&auto=format&fit=crop" alt="[ऐतिहासिक फोटो १]">
+                        <div class="history-desc">
+                            <span class="date-badge">८ एप्रिल १९२९</span>
+                            <h3>सेंट्रल असेंब्ली बॉम्बस्फोटाचा ऐतिहासिक प्रसंग</h3>
+                            <p style="font-size:14px;">भगतसिंग आणि बटुकेश्वर दत्त यांनी दिल्लीतील सेंट्रल असेंब्लीमध्ये 'इंकलाब झिंदाबाद'च्या घोषणा देत जाहीर पत्रके फेकली होती.</p>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <img class="history-img" src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?q=80&w=600&auto=format&fit=crop" alt="[ऐतिहासिक फोटो २]">
+                        <div class="history-desc">
+                            <span class="date-badge">१७ डिसेंबर १९२८</span>
+                            <h3>लाहोर कटातील इंग्रजी अधिकारी सांडर्स वध</h3>
+                            <p style="font-size:14px;">लाला लजपतराय यांच्या हत्येचा बदला घेण्यासाठी भगतसिंग, राजगुरू व चंद्रशेखर आझाद यांनी आखलेली धाडसी कारवाई.</p>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <img class="history-img" src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=600&auto=format&fit=crop" alt="[ऐतिहासिक फोटो ३]">
+                        <div class="history-desc">
+                            <span class="date-badge">१९२६</span>
+                            <h3>नौजवान भारत सभेची स्थापना आणि बैठक</h3>
+                            <p style="font-size:14px;">तरुणांमध्ये देशभक्ती व समतेचे विचार रुजवण्यासाठी सुखदेव आणि भगतसिंग यांनी स्थापन केलेली संघटना.</p>
+                        </div>
+                    </div>
+
+                    <div class="history-card">
+                        <img class="history-img" src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?q=80&w=600&auto=format&fit=crop" alt="[ऐतिहासिक फोटो ४]">
+                        <div class="history-desc">
+                            <span class="date-badge">२३ मार्च १९३१</span>
+                            <h3>लाहोर जेलमधील अंतिम निरोप छायाचित्र</h3>
+                            <p style="font-size:14px;">देशाच्या स्वातंत्र्यासाठी तिन्ही हुतात्म्यांनी हसतमुखाने फाशीचा फंद स्वीकारण्यापूर्वीचा अमर इतिहास.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 5 ================= -->
+        <div id="page5" class="page">
+            <div class="card">
+                <h2 style="color:var(--saffron); margin-bottom: 16px;"><i class="fa-solid fa-images"></i> युवा शक्ती मोहीम फोटो गॅलरी</h2>
+                <p style="font-size:14px; color:var(--text-muted); margin-bottom:20px;">मोहिमे अंतर्गत आयोजित सर्व बैठका, नियोजन व कार्यक्रमांचे फोटो.</p>
+
+                <div class="gallery-grid" id="photoGalleryGrid">
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=600&auto=format&fit=crop" alt="[बैठक १]"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600&auto=format&fit=crop" alt="[बैठक २]"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600&auto=format&fit=crop" alt="[विद्यार्थी संवाद]"></div>
+                    <div class="gallery-item"><img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=600&auto=format&fit=crop" alt="[शिक्षक बैठक]"></div>
+                </div>
+            </div>
+            <button class="fab-add" title="फोटो जोडा" onclick="openModal('addPhotoModal')"><i class="fa-solid fa-plus"></i></button>
+        </div>
+
+        <!-- ================= PAGE 7 ================= -->
+        <div id="page7" class="page">
+            <div class="card">
+                <h1 style="color:var(--saffron); text-align:center; margin-bottom:12px;">नेहरू शिक्षण संस्था संचलित, महाविद्यालय नेर-परसोपंत</h1>
+                <p style="text-align:center; font-weight:600; color:var(--text-muted); margin-bottom: 20px;">जि. यवतमाळ | नॅक द्वारे B++ मानांकन प्राप्त</p>
+
+                <div style="font-size:14.5px; line-height:1.8; margin-bottom: 24px;">
+                    नेर-परसोपंत आणि परिसरातील जनतेच्या महाविद्यालयीन शिक्षणाची गरज लक्षात घेऊन नेर परसोपंत येथील नेहरू शिक्षण संस्थेने जुलै १९६५ मध्ये या महाविद्यालायाची स्थापना केली. या संस्थेने प्रामुख्याने या परिसरातील ग्रामीण व सर्व स्तरातील विद्यार्थ्यांना उच्च शिक्षणाची सोय उपलब्ध करून दिली. त्या दृष्टीने संस्थेचे व्यवस्थापक मंडळ संस्थेच्या विकासाकरिता सदैव कार्यरत आहे. परिणामस्वरुप सुवर्णमहोत्सव वर्षात नॅकतर्फे बी. प्लस प्लस मानांकन अशी सुवर्णांकित यशोद्घेप महाविद्यालयाने घेतली. ही बाब या संस्थेतील पदाधिकारी कर्मचारी यांच्यासाठी गौरवाची आहे.<br><br>
+                    हे महाविद्यालय ग्रामीण व शासनाद्वारे घोषित यवतमाळ या मागास जिल्ह्यात असून अल्पसंख्यांकासाठी उर्दू माध्यमातून शिक्षण देण्याचे कार्य देखील करीत आहे. या महाविद्यालयात कला, वाणिज्य व विज्ञान या अभ्यासशाखेचे कनिष्ठ, पदवी व पदव्युत्तर अभ्यासक्रम सुरू आहेत. अतिशय प्रशस्त जागेत या महाविद्यालयाची स्वतःच्या मालकीची इमारत असून क्रीडांगण, कला वाणिज्य, विज्ञान प्रयोगशाला, समृद्ध व सुसज्ज संगणकृत कार्यालय आणि ग्रंथालय, विद्यार्थ्यांच्या सर्वांगीण विकासासाठी उपलब्ध आहे.
+                </div>
+
+                <h3 style="color:var(--saffron); margin-bottom: 10px;">🎯 महाविद्यालयाची उद्दिष्ट्ये</h3>
+                <ol style="margin-left: 20px; font-size:14px; margin-bottom: 30px; line-height: 1.8;">
+                    <li>तालुक्यातील विद्यार्थी उच्च शिक्षणापासून वंचित राहू नये.</li>
+                    <li>विद्यार्थ्यांचे सुप्त गुण ओळखून त्याआधारे त्यांना सक्षम करणे.</li>
+                    <li>सेवावृत्ती, सहिष्णुता समतामूलक विचार या द्वारे विद्यार्थ्यांच्या व्यक्तिमत्त्वाचा सर्वांगीण विकास करणे.</li>
+                    <li>विद्यार्थ्यांत शैक्षणिक, सांस्कृतिक आणि सामाजिक जाणीव आणि वैचारिकता निर्माण करणे.</li>
+                    <li>उच्च शिक्षण घेऊ इच्छिणाऱ्या सर्व स्तरातील विद्यार्थ्यांना सोय उपलब्ध करून देणे.</li>
+                </ol>
+
+                <!-- Chart 1 -->
+                <h3 style="color:var(--saffron); margin-top:20px;">१. महाविद्यालय विकास समिती (CDC)</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr><th>क्र.</th><th>नाव</th><th>पदनाम</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>०१</td><td>श्री. परमानंदजी सुंदरलालजी अग्रवाल</td><td>संस्था अध्यक्ष</td></tr>
+                            <tr><td>०२</td><td>श्री. हाजी मजहरखाँ युसुफ खाँ पठाण</td><td>सचिव</td></tr>
+                            <tr><td>०३</td><td>डॉ. पी.एस.बनसोड</td><td>विभाग प्रमुख</td></tr>
+                            <tr><td>०४</td><td>डॉ. कु. एस. आर. जाधव</td><td>अध्यापक प्रतिनिधी (महिला)</td></tr>
+                            <tr><td>०५</td><td>श्री. एफ. पी. साहाळा</td><td>अध्यापक प्रतिनिधी</td></tr>
+                            <tr><td>०६</td><td>डॉ. डि.जे.भगत</td><td>अध्यापक प्रतिनिधी</td></tr>
+                            <tr><td>०७</td><td>श्री. एस.आर बांबोंडे</td><td>अध्यापकेत्तर प्रतिनिधी</td></tr>
+                            <tr><td>०८</td><td>श्री. राजेंद्र पुंडलिकराव चिरडे</td><td>शिक्षण क्षेत्र तज्ज्ञ</td></tr>
+                            <tr><td>०९</td><td>श्री. रवि परमानंदजी अग्रवाल</td><td>उद्योग क्षेत्र तज्ज्ञ</td></tr>
+                            <tr><td>१०</td><td>श्री. सुनिल जगन्नाथराव धोटकर</td><td>संशोधन क्षेत्र तज्ज्ञ</td></tr>
+                            <tr><td>११</td><td>श्री. राजेश बनवारीलालजी अग्रवाल</td><td>समाजसेवा क्षेत्र तज्ज्ञ</td></tr>
+                            <tr><td>१२</td><td>डॉ. पी.एस.विश्वकर्मा</td><td>समन्वयक आय.क्यू.ए.सी.</td></tr>
+                            <tr><td>१३</td><td>डॉ. उदय एन.मांजरे (प्राचार्य)</td><td>पदसिद्ध सचिव</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Chart 2 -->
+                <h3 style="color:var(--saffron); margin-top:20px;">२. शाळा समिती</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr><th>क्र.</th><th>नाव</th><th>पदनाम</th><th>भ्रमणध्वनी</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>०१</td><td>श्री. परमानंदजी सुंदरलालजी अग्रवाल</td><td>अध्यक्ष</td><td>९०२२३४५४६२</td></tr>
+                            <tr><td>०२</td><td>डॉ. उदय एन.मांजरे (प्राचार्य)</td><td>पदसिद्ध सदस्य सचिव</td><td>९४२१७३६७९३</td></tr>
+                            <tr><td>०३</td><td>श्री. रवि परमानंदजी अग्रवाल</td><td>सदस्य</td><td>९४२२२९१६३१</td></tr>
+                            <tr><td>०४</td><td>श्री. हाजी मजहरखाँ युसुफ खाँ पठाण</td><td>सदस्य</td><td>९४२३४३४००२</td></tr>
+                            <tr><td>०५</td><td>श्री. डॉ. मोहन जवाहरलालजी शर्मा</td><td>सदस्य</td><td>८०८७१०३६८५</td></tr>
+                            <tr><td>०६</td><td>श्री. आर.एस.गुल्हाने (शिक्षक प्रतिनिधी)</td><td>सदस्य</td><td>९४०४३३८८६६</td></tr>
+                            <tr><td>०७</td><td>श्री. एस. पी. नवरंगे (शिक्षकेत्तर प्रतिनिधी)</td><td>सदस्य</td><td>९४२३६२४८२०</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Chart 3 -->
+                <h3 style="color:var(--saffron); margin-top:20px;">३. वरिष्ठ महाविद्यालय</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr><th>क्र.</th><th>नाव</th><th>पात्रता / शिक्षण</th><th>भ्रमणध्वनी</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>०१</td><td>डॉ. पी. एस. बनसोड</td><td>एम.ए. (मराठी), सेट, एम. एम.सी., पीएच.डी.</td><td>९४२३४२५१२९</td></tr>
+                            <tr><td>०२</td><td>प्रा. डॉ. एस. व्ही. अडसोड</td><td>एम. कॉम.,एम.ए.(अर्थशास्त्र),एम.फील., पीएच.डी.</td><td>९४२००२५६११</td></tr>
+                            <tr><td>०३</td><td>सह. प्रा. डॉ. एस. व्ही. गावंडे</td><td>एम.ए (मराठी), नेट, सेट, बी.एड.डी.जे., पीएच.डी.</td><td>९४०४८५१८१८</td></tr>
+                            <tr><td>०४</td><td>सह. प्रा. डॉ. पी.एस. विश्वकर्मा</td><td>एम. कॉम., एम.सी.एम.,नेट., एम.फील.,पीएच.डी.</td><td>९८९०३४२३१३</td></tr>
+                            <tr><td>०५</td><td>सह. प्रा. डॉ. व्ही. पी. कुटे</td><td>एम.ए. (अर्थशास्त्र), एम.फील., पीएच.डी.</td><td>७७०९०२३६७६</td></tr>
+                            <tr><td>०६</td><td>सह. प्रा. एम. पी. साहाळा</td><td>एम.कॉम. नेट</td><td>९४२२६६०७३५</td></tr>
+                            <tr><td>०७</td><td>श्री. डॉ. व्ही. ए. खोडस्कर</td><td>एमपी.एड., एम.फील, पीएच.डी.</td><td>९७३०८८५७६३</td></tr>
+                            <tr><td>०८</td><td>सह. प्रा.डॉ. एम.डी. वडते</td><td>एम.ए. (समाजशास्त्र) एम.फील. पीएच.डी.</td><td>८२०८५३४२६८</td></tr>
+                            <tr><td>०९</td><td>सह. प्रा. डॉ. व्ही.डी. बोके</td><td>एमएससी, (गणित), बी.एड, पीएच.डी.</td><td>९७६६२११२२१</td></tr>
+                            <tr><td>१०</td><td>सह. प्रा. डॉ. डी. जे. भगत</td><td>एमएससी, (भौतिकशास्त्र) बी.एड, पीएच.डी.</td><td>८२७५३१९८३</td></tr>
+                            <tr><td>११</td><td>श्री. एस. के. इंगळे (ग्रंथपाल)</td><td>एम.लिब., सेट</td><td>८०८७६०२२८८</td></tr>
+                            <tr><td>१२</td><td>सह. प्रा. ए. शेड. खान</td><td>एम.ए.(उर्दू), बी.एड्., सेट, नेट</td><td>९७६६३८२५१०</td></tr>
+                            <tr><td>१३</td><td>सह. प्रा. डॉ. एम. पी. गोमासे</td><td>एम.ए. (इतिहास), बी.एड्., एम.फील, पीएच.डी.</td><td>९४२३६२४८४९</td></tr>
+                            <tr><td>१४</td><td>सह.प्रा.डॉ. कु. एस. आर. जाधव</td><td>एमएससी, (भौतिकशास्त्र) पीएच.डी.</td><td>९१७२५२५८७९</td></tr>
+                            <tr><td>१५</td><td>सह. प्रा.डॉ. एस. ए. काटोले</td><td>एम.ए. (इंग्रजी), बी.एड्., पीएच.डी.</td><td>९८२२१७५१२३</td></tr>
+                            <tr><td>१६</td><td>प्रा. पी. एच. चव्हाण</td><td>एम.ए. (मराठी), बी.एड्., (Adhoc)</td><td>७३८५५३७१६५</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Chart 4 -->
+                <h3 style="color:var(--saffron); margin-top:20px;">४. कनिष्ठ महाविद्यालय</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr><th>क्र.</th><th>नाव</th><th>पात्रता / शिक्षण</th><th>भ्रमणध्वनी</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>०१</td><td>श्री. एच. एच. शेख</td><td>एम.ए. (इंग्रजी), बी.एड्.</td><td>९४२०५५०४७५</td></tr>
+                            <tr><td>०२</td><td>श्री. आर. एस. गुल्हाने</td><td>एम. ए. (राज्यशास्त्र), बी.एड्.</td><td>९९७०३५३४३९</td></tr>
+                            <tr><td>०३</td><td>श्री. एस. जे. चव्हाण</td><td>एम.ए. (मराठी) बी.एड.एम.पी.एड् (शारीरिक शिक्षण शिक्षक)</td><td>९४२१८५३३१२</td></tr>
+                            <tr><td>०४</td><td>श्री. एन. एस. खन्ना</td><td>एम.कॉम.एम.फील.बी.एड्.</td><td>९४२३७६२४५८</td></tr>
+                            <tr><td>०५</td><td>कु. व्ही. के. उईके</td><td>एम.ए. (मराठी) बी.एड्.</td><td>८६९८९०८७३१</td></tr>
+                            <tr><td>०६</td><td>श्री. पी. व्ही. कुकडे</td><td>एम.ए. (अर्थशास्त्र) बी.एड्.</td><td>९९२२१२२५७९</td></tr>
+                            <tr><td>०७</td><td>श्री. एम. एम. तायडे</td><td>एम.ए. इंग्रजी, बी.एड्.एम.फील.</td><td>९४०४५४५७१२</td></tr>
+                            <tr><td>०८</td><td>कु. एम. व्ही. गुल्हाणे</td><td>एम.ए., बी.एड् (समाजशास्त्र)</td><td>७७९८६९४४१६</td></tr>
+                            <tr><td>०९</td><td>कु. एन.व्ही. दहाट</td><td>एम.ए. (इतिहास), बी.एड्</td><td>८७६६४९३५६९</td></tr>
+                            <tr><td>१०</td><td>श्री. एन. ए. घरत</td><td>एम.कॉम.,एम.ए. (अर्थ), बी.एड्</td><td>८८०६८३६७०९</td></tr>
+                            <tr><td>११</td><td>श्री. एन.एस. दरेकर</td><td>एम.कॉम. (सहकार), बी.एड्</td><td>९७३०५८५८५४</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Chart 5 -->
+                <h3 style="color:var(--saffron); margin-top:20px;">५. वैद्यकीय अधिकारी</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr><th>क्र.</th><th>नाव</th><th>पात्रता / शिक्षण</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>०१</td><td>डॉ. उषा कोळपे जाधव</td><td>एम.बी.बी.एस., डी.जी.ओ.</td></tr>
+                            <tr><td>०२</td><td>डॉ. एस. आर. जाधव</td><td>एम.बी.बी.एस., डी.जी.एम.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Chart 6 -->
+                <h3 style="color:var(--saffron); margin-top:20px;">६. कार्यालय विभाग</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr><th>क्र.</th><th>नाव</th><th>पदनाम</th><th>भ्रमणध्वनी</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>०१</td><td>श्री. एल. पी. पालीवाल</td><td>अधीक्षक</td><td>९७६६८८१८८८</td></tr>
+                            <tr><td>०२</td><td>श्री. एस. पी. नवरंगे</td><td>मुख्य लिपीक</td><td>९४२१७३५८५९</td></tr>
+                            <tr><td>०३</td><td>श्री. डी.एस. तलवारे</td><td>वरिष्ठ लिपीक</td><td>९४२३६२४८२०</td></tr>
+                            <tr><td>०४</td><td>श्री. एस. आर. बांबोंडे</td><td>वरिष्ठ लिपीक</td><td>९४२३६६३६७६</td></tr>
+                            <tr><td>०५</td><td>कु. बी. आर. देवतारे</td><td>ग्रंथालय लिपीक / टंकलेखक</td><td>९८८१४८७१०२</td></tr>
+                            <tr><td>०६</td><td>श्री. ए. डी. देशमुख</td><td>प्रयोगशाळा सहायक</td><td>९४२३६६३६७६</td></tr>
+                            <tr><td>०७</td><td>श्री. जे. एस. शेंबाडे</td><td>कनिष्ठ लिपीक</td><td>९८२३६४९७७८</td></tr>
+                            <tr><td>०८</td><td>श्री. इरफान खान</td><td>कनिष्ठ लिपीक</td><td>८४४६५२२८७२</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Chart 7 -->
+                <h3 style="color:var(--saffron); margin-top:20px;">७. चतुर्थ श्रेणी कर्मचारी</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr><th>क्र.</th><th>नाव</th><th>पदनाम</th><th>भ्रमणध्वनी</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>०१</td><td>श्री. आर. पी. ढगे</td><td>ग्रंथालय परिचर</td><td>९४२०७७४००६</td></tr>
+                            <tr><td>०२</td><td>श्री. एन. के. सिरसाठ</td><td>ग्रंथालय परिचर</td><td>९५९५०९३५४</td></tr>
+                            <tr><td>०३</td><td>श्री. ए. बी. अघम</td><td>शिपाई</td><td>९४२३६५४१०४</td></tr>
+                            <tr><td>०४</td><td>श्री. एम. एस. आठवले</td><td>शिपाई</td><td>९४०४४७८५६५</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+<!-- Google Map Section (Page 7 Bottom) -->
+<div class="map-container" style="margin-top: 25px; margin-bottom: 20px; text-align: center;">
+    <h3 style="margin-bottom: 12px; color: #333; font-weight: bold;">नेहरू महाविद्यालयाचे ठिकाण (Location)</h3>
+    
+    <div style="width: 100%; max-width: 100%; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3737.1310706122417!2d77.86699639999999!3d20.5008525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd157130d95387d%3A0xc8fa32087c26baf8!2sNeharu%20Arts%20and%20Commere%20College%2C%20Ner%20Parsopant!5e0!3m2!1sen!2sin!4v1786284826304!5m2!1sen!2sin" 
+            width="100%" 
+            height="320" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+    </div>
+</div>
+   </div>
+
+    <!-- MODAL 1: Registration Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('registerModal')">&times;</span>
+            <h3 style="color: var(--saffron); margin-bottom: 15px;"><i class="fa-solid fa-user-plus"></i> युवा शक्ती मोहीम नोंदणी</h3>
+            
+            <form id="regForm" onsubmit="return false;">
+                <div class="form-group">
+                    <label>तुमचे पूर्ण नाव</label>
+                    <input type="text" id="regFullName" placeholder="उदा. जय गजानन मोहुर्ले" required>
+                </div>
+
+                <div class="form-group">
+                    <label>तुम्ही कोण आहात?</label>
+                    <select id="regRole" onchange="handleRoleChange()" required>
+                        <option value="">निवडा</option>
+                        <option value="विद्यार्थी">विद्यार्थी</option>
+                        <option value="शिक्षक">शिक्षक</option>
+                        <option value="इतर">इतर (कर्मचारी / नागरिक)</option>
+                    </select>
+                </div>
+
+                <!-- Student Fields -->
+                <div id="studentFields" style="display: none;">
+                    <div class="form-group">
+                        <label>इयत्ता / अभ्यासक्रम निवडा</label>
+                        <select id="regClassCourse" onchange="handleCourseChange()">
+                            <option value="">निवडा</option>
+                            <option value="11th">११ वी (11th)</option>
+                            <option value="12th">१२ वी (12th)</option>
+                            <option value="B.A">बी.ए. (B.A)</option>
+                            <option value="B.Com">बी.कॉम (B.Com)</option>
+                            <option value="B.Sc">बी.एससी (B.Sc)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="yearGroup" style="display: none;">
+                        <label>वर्ष निवडा</label>
+                        <select id="regDegreeYear">
+                            <option value="प्रथम वर्ष">प्रथम वर्ष (1st Year)</option>
+                            <option value="द्वितीय वर्ष">द्वितीय वर्ष (2nd Year)</option>
+                            <option value="तृतीय वर्ष">तृतीय वर्ष (3rd Year)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>रोल नंबर (Roll No)</label>
+                        <input type="text" id="regRollNo" placeholder="उदा. 101">
+                    </div>
+                </div>
+
+                <!-- Teacher Fields -->
+                <div id="teacherFields" style="display: none;">
+                    <div class="form-group">
+                        <label>विषय (Subject)</label>
+                        <select id="regTeacherSubject">
+                            <option value="इंग्रजी">इंग्रजी</option>
+                            <option value="मराठी">मराठी</option>
+                            <option value="उर्दू">उर्दू</option>
+                            <option value="इतिहास">इतिहास</option>
+                            <option value="राज्यशास्त्र">राज्यशास्त्र</option>
+                            <option value="समाजशास्त्र">समाजशास्त्र</option>
+                            <option value="अर्थशास्त्र">अर्थशास्त्र</option>
+                            <option value="भूगोल">भूगोल</option>
+                            <option value="ग्रंथालयशास्त्र">ग्रंथालयशास्त्र</option>
+                            <option value="योगशास्त्र">योगशास्त्र</option>
+                            <option value="गणित">गणित</option>
+                            <option value="विज्ञान">विज्ञान</option>
+                            <option value="इतर">इतर</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Other Fields -->
+                <div id="otherFields" style="display: none;">
+                    <div class="form-group">
+                        <label>तुमचे पद / ओळख</label>
+                        <input type="text" id="regOtherRole" placeholder="उदा. समाजसेवक / माजी विद्यार्थी">
+                    </div>
+                </div>
+
+                <!-- Photo Upload -->
+                <div class="form-group">
+                    <label>तुमचा फोटो अपलोड करा</label>
+                    <input type="file" id="regPhotoInput" accept="image/*" onchange="previewUserPhoto(event)">
+                </div>
+
+                <!-- Mobile & OTP -->
+                <div class="form-group">
+                    <label>मोबाईल नंबर (१० अंकी)</label>
+                    <input type="tel" id="regPhone" placeholder="उदा. 9325241983" maxlength="10" required>
+                </div>
+
+                <div id="recaptcha-container"></div>
+
+                <button id="sendOtpBtn" class="btn-saffron" style="width:100%; justify-content:center;" onclick="sendOTP()"><i class="fa-solid fa-paper-plane"></i> खरा SMS OTP पाठवा</button>
+
+                <div id="otpSection" style="display:none; margin-top:14px;">
+                    <div class="form-group">
+                        <label>मोबाईलवर आलेला OTP टाका</label>
+                        <input type="text" id="otpInput" maxlength="6" placeholder="६ अंकी OTP">
+                    </div>
+                    <button class="btn-saffron" style="width:100%; justify-content:center;" onclick="verifyOTP()"><i class="fa-solid fa-circle-check"></i> OTP व्हेरिफाय करा आणि नोंदणी पूर्ण करा</button>
+                </div>
+
+                <p id="regStatus" class="status-msg"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: ID Card View Modal -->
+    <div id="idCardModal" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close-modal" onclick="closeModal('idCardModal')">&times;</span>
+            <h3 style="color:var(--saffron); margin-bottom:15px;"><i class="fa-solid fa-id-card"></i> तुमचे डिजिटल आयडेंटी कार्ड</h3>
+
+            <div id="idCardCanvasWrap" class="id-card-wrap">
+                <div class="id-overlay"></div>
+                <div class="id-body">
+                    <p style="font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--saffron);">युवा शक्ती मोहीम</p>
+                    <h4 style="font-size:13px; margin-bottom:8px;">नेहरू शिक्षण संस्था महाविद्यालय, नेर-परसोपंत</h4>
+                    <span class="id-badge-role" id="idCardBadgeRole">विद्यार्थी</span>
+                    
+                    <img id="idCardPhoto" class="user-photo" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=300&auto=format&fit=crop" alt="[युझर फोटो]">
+                    <h3 id="idCardName" style="font-size:18px; color:#FFF; font-weight:700;">जय गजानन मोहुर्ले</h3>
+                    <p id="idCardDetails" style="font-size:13px; color:#E2E8F0; margin-top:4px;">वर्ग: B.A. 1st Year | Roll No: 101</p>
+                    <p id="idCardGroup" style="font-size:12px; color:var(--saffron); font-weight:bold; margin-top:6px;">गट: 'ब' गट (युवा शक्ती अर्जदार)</p>
+                    <p id="idCardMobile" style="font-size:11px; color:#94A3B8; margin-top:4px;">मोबाईल: 9325241983</p>
+                </div>
+                <div style="position:relative; z-index:2; font-size:10px; color:#94A3B8;">
+                    शहीद भगतसिंग, राजगुरू व सुखदेव स्मारक मोहीम
+                </div>
+            </div>
+
+            <button class="btn-saffron" style="margin:0 auto;" onclick="downloadIDCard()"><i class="fa-solid fa-download"></i> आयडेंटी कार्ड डाउनलोड करा</button>
+        </div>
+    </div>
+
+    <!-- MODAL 3: Complaint / Issue Modal -->
+    <div id="complaintModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('complaintModal')">&times;</span>
+            <h3 style="color:var(--saffron); margin-bottom:14px;"><i class="fa-solid fa-triangle-exclamation"></i> अडचण किंवा तक्रार नोंदवा</h3>
+            <div class="form-group">
+                <label>तुमची अडचण येथे सविस्तर लिहा</label>
+                <textarea id="complaintText" rows="4" placeholder="तुम्हाला येत असलेली अडचण लिहा..."></textarea>
+            </div>
+            <button class="btn-saffron" style="width:100%; justify-content:center;" onclick="submitComplaint()"><i class="fa-solid fa-paper-plane"></i> पाठवा</button>
+        </div>
+    </div>
+
+    <!-- MODAL 4: Books Search Modal -->
+    <div id="booksSearchModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('booksSearchModal')">&times;</span>
+            <h3 style="color:var(--saffron); margin-bottom:14px;"><i class="fa-solid fa-book"></i> हुतात्म्यांवरील पुस्तके व लेख</h3>
+            <input type="text" id="modalSearchInput" placeholder="पुस्तकाचे किंवा क्रांतीकारकांचे नाव शोधा..." onkeyup="searchBooksList()" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); margin-bottom:12px;">
+            
+            <div id="booksList" style="max-height:300px; overflow-y:auto; font-size:14px;">
+                <div class="member-item"><strong>१. मी नास्तिक का आहे? (Why I am an Atheist)</strong> - लेखक: शहीद भगतसिंग</div>
+                <div class="member-item"><strong>२. भगतसिंग आणि त्यांचे सहकारी</strong> - ऐतिहासिक संदर्भ ग्रंथ</div>
+                <div class="member-item"><strong>३. हुतात्मा शिवराम हरी राजगुरू जीवनगाथा</strong> - महाराष्ट्र इतिहास संकलन</div>
+                <div class="member-item"><strong>४. सुखदेव: क्रांतीचा तेजस्वी अध्याय</strong> - पंजाब क्रांती गाथा</div>
+                <div class="member-item"><strong>५. लाहोर कट खटला आणि स्वातंत्र्यलढा</strong> - दुर्मिळ दस्तऐवज लेख</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 5: Updates Modal -->
+    <div id="updatesModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('updatesModal')">&times;</span>
+            <h3 style="color:var(--saffron); margin-bottom:14px;"><i class="fa-solid fa-bell"></i> मोहिमेतील सर्व मोफत अपडेट्स</h3>
+            <div id="updatesList" style="font-size:14px; line-height:1.7;">
+                <div class="member-item">📌 <strong>अपडेट १:</strong> महाविद्यालयात मूर्ती स्थापनेकरिता जागेची पाहणी पूर्ण झाली आहे.</div>
+                <div class="member-item">📌 <strong>अपडेट २:</strong> प्राचार्य व व्यवस्थापन मंडळाकडे औपचारिक अर्ज सादर करण्यात आला आहे.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 6: Add Photo Modal (Page 5) -->
+    <div id="addPhotoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('addPhotoModal')">&times;</span>
+            <h3 style="color:var(--saffron); margin-bottom:14px;"><i class="fa-solid fa-image"></i> गॅलरीत फोटो जोडा</h3>
+            <div class="form-group">
+                <label>फोटो निवडा</label>
+                <input type="file" id="galleryFileInput" accept="image/*">
+            </div>
+            <button class="btn-saffron" style="width:100%; justify-content:center;" onclick="addPhotoToGallery()"><i class="fa-solid fa-upload"></i> फोटो अपलोड करा</button>
+        </div>
+    </div>
+
+    <!-- MODAL 7: Admin Panel Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('adminModal')">&times;</span>
+            <h3 style="color:var(--saffron); margin-bottom:15px;"><i class="fa-solid fa-user-gear"></i> ॲडमिन पॅनल कंट्रोल</h3>
+
+            <div class="form-group">
+                <label>१. मुख्य टायटल एडिट करा</label>
+                <input type="text" id="adminTitleInput" placeholder="नवीन टायटल लिहा">
+                <button class="btn-saffron" style="margin-top:6px; padding:6px 12px; font-size:12px;" onclick="updateAdminTitle()">टायटल अपडेट करा</button>
+            </div>
+
+            <div class="form-group" style="border-top:1px solid var(--border); padding-top:10px;">
+                <label>२. सूचना (Updates) जोडा</label>
+                <input type="text" id="adminUpdateInput" placeholder="नवीन सूचना लिहा">
+                <button class="btn-saffron" style="margin-top:6px; padding:6px 12px; font-size:12px;" onclick="addAdminNotice()">सूचना जोडा</button>
+            </div>
+
+            <div class="form-group" style="border-top:1px solid var(--border); padding-top:10px;">
+                <label>३. सर्व सदस्यांची यादी डाउनलोड करा</label>
+                <button class="btn-saffron" style="padding:8px 12px; font-size:13px;" onclick="exportMembersCSV()"><i class="fa-solid fa-file-csv"></i> CSV डाउनलोड</button>
+            </div>
+
+            <div class="form-group" style="border-top:1px solid var(--border); padding-top:10px;">
+                <label>४. प्राप्त झालेल्या अडचणी / तक्रारी</label>
+                <div id="adminComplaintsList" style="max-height:120px; overflow-y:auto; font-size:12px; background:var(--bg-color); padding:8px; border-radius:6px;">
+                    अद्याप कोणतीही तक्रार नाही.
+                </div>
+            </div>
+
+            <div class="form-group" style="border-top:1px solid var(--border); padding-top:10px;">
+                <label>५. मोहीम पूर्ण घोषित करा 🎉</label>
+                <input type="text" id="adminCompleteTitle" placeholder="उदा. मोहीम यशस्वीरीत्या पूर्ण झाली!">
+                <input type="file" id="adminCompletePhoto" accept="image/*" style="margin-top:6px;">
+                <button class="btn-saffron" style="margin-top:8px; background-color:#059669;" onclick="declareCampaignCompleted()"><i class="fa-solid fa-trophy"></i> मोहीम पूर्ण घोषित करा</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Libraries -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+        import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCR1xCH84VkL6GGzjnSKIffRfLaN1BXsmQ",
+            authDomain: "yuva-shakti-campaign.firebaseapp.com",
+            projectId: "yuva-shakti-campaign",
+            storageBucket: "yuva-shakti-campaign.firebasestorage.app",
+            messagingSenderId: "383342321588",
+            appId: "1:383342321588:web:8abfcf3cad95adf88b9ce1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let confirmationResultObj = null;
+
+        window.addEventListener('load', () => {
+            window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+                'size': 'invisible',
+                'callback': (response) => {}
+            });
+            loadRegisteredData();
+        });
+
+        // Send Real SMS OTP
+        window.sendOTP = function() {
+            const name = document.getElementById("regFullName").value.trim();
+            const role = document.getElementById("regRole").value;
+            const phone = document.getElementById("regPhone").value.trim();
+            const regStatus = document.getElementById("regStatus");
+
+            if(!name || !role || phone.length !== 10) {
+                regStatus.style.color = "red";
+                regStatus.innerText = "कृपया नाव, भूमिका व १० अंकी मोबाईल नंबर पूर्ण भरा.";
+                return;
+            }
+
+            const formatPhone = "+91" + phone;
+            const appVerifier = window.recaptchaVerifier;
+
+            regStatus.style.color = "orange";
+            regStatus.innerText = "खरा SMS OTP पाठवला जात आहे...";
+
+            signInWithPhoneNumber(auth, formatPhone, appVerifier)
+                .then((confirmationResult) => {
+                    confirmationResultObj = confirmationResult;
+                    regStatus.style.color = "green";
+                    regStatus.innerText = "OTP मोबाईलवर पाठवण्यात आला आहे!";
+                    document.getElementById("otpSection").style.display = "block";
+                    document.getElementById("sendOtpBtn").style.display = "none";
+                }).catch((error) => {
+                    regStatus.style.color = "red";
+                    regStatus.innerText = "SMS एरर (चाचणीसाठी 123456 वापरा किंवा रीफ्रेश करा): " + error.message;
+                });
+        };
+
+        // Verify OTP & Save Data
+        window.verifyOTP = function() {
+            const otp = document.getElementById("otpInput").value.trim();
+            const regStatus = document.getElementById("regStatus");
+
+            if(otp.length !== 6) {
+                regStatus.style.color = "red";
+                regStatus.innerText = "६ अंकी बरोबर OTP टाका.";
+                return;
+            }
+
+            regStatus.style.color = "orange";
+            regStatus.innerText = "OTP तपासला जात आहे...";
+
+            confirmationResultObj.confirm(otp).then((result) => {
+                saveUserData(result.user.uid);
+            }).catch((error) => {
+                // Fallback for testing mode if OTP direct bypass is allowed
+                if(otp === "123456") {
+                    saveUserData("test_user_" + Date.now());
+                } else {
+                    regStatus.style.color = "red";
+                    regStatus.innerText = "चुकीचा OTP! कृपया अचूक कोड टाका.";
+                }
+            });
+        };
+
+        function saveUserData(uid) {
+            const name = document.getElementById("regFullName").value.trim();
+            const role = document.getElementById("regRole").value;
+            const phone = document.getElementById("regPhone").value.trim();
+            const course = document.getElementById("regClassCourse").value;
+            const year = document.getElementById("regDegreeYear").value;
+            const roll = document.getElementById("regRollNo").value.trim();
+            const subject = document.getElementById("regTeacherSubject").value;
+            const otherRole = document.getElementById("regOtherRole").value.trim();
+
+            let assignedGroup = 'D';
+            let groupName = "'ड' गट (सहकार्य समिती)";
+
+            if(role === 'विद्यार्थी') {
+                if(course === '11th' || course === '12th') {
+                    assignedGroup = 'A';
+                    groupName = "'अ' गट (युवा शक्ती दूत)";
+                } else {
+                    assignedGroup = 'B';
+                    groupName = "'ब' गट (युवा शक्ती अर्जदार)";
+                }
+            } else if(role === 'शिक्षक') {
+                assignedGroup = 'C';
+                groupName = "'क' गट (युवा शक्ती मार्गदर्शक)";
+            }
+
+            const userData = {
+                uid: uid,
+                fullName: name,
+                role: role,
+                phone: phone,
+                course: course,
+                degreeYear: year,
+                rollNo: roll,
+                subject: subject,
+                otherRole: otherRole,
+                assignedGroup: assignedGroup,
+                groupName: groupName,
+                photo: window.currentUserPhotoBase64 || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=300&auto=format&fit=crop",
+                registeredAt: new Date().toISOString()
+            };
+
+            // Save to Firestore
+            setDoc(doc(db, "registrations", uid), userData).then(() => {
+                completeRegistration(userData);
+            }).catch(() => {
+                completeRegistration(userData);
+            });
+        }
+
+        function completeRegistration(userData) {
+            localStorage.setItem("currentUser", JSON.stringify(userData));
+            
+            // Local Data List Update
+            let allMembers = JSON.parse(localStorage.getItem("allCampaignMembers") || "[]");
+            allMembers.push(userData);
+            localStorage.setItem("allCampaignMembers", JSON.stringify(allMembers));
+
+            document.getElementById("regStatus").style.color = "green";
+            document.getElementById("regStatus").innerText = "🎉 नोंदणी यशस्वीरीत्या पूर्ण झाली!";
+
+            if(userData.phone === "9325241983") {
+                document.getElementById("adminMenuOption").style.display = "flex";
+                alert("अभिनंदन! तुम्ही ॲडमिन म्हणून अधिकृत प्रवेश केला आहे.");
+            }
+
+            setTimeout(() => {
+                closeModal('registerModal');
+                renderGroupLists();
+                showMyIdCard();
+            }, 1200);
+        }
+
+        async function loadRegisteredData() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "registrations"));
+                let remoteMembers = [];
+                querySnapshot.forEach((doc) => {
+                    remoteMembers.push(doc.data());
+                });
+                if(remoteMembers.length > 0) {
+                    localStorage.setItem("allCampaignMembers", JSON.stringify(remoteMembers));
+                }
+            } catch(e) {}
+            renderGroupLists();
+            checkAdminStatus();
+        }
+
+        function checkAdminStatus() {
+            const user = JSON.parse(localStorage.getItem("currentUser") || "{}");
+            if(user.phone === "9325241983") {
+                document.getElementById("adminMenuOption").style.display = "flex";
+            }
+        }
+    </script>
+
+    <!-- General Application Helper Scripts -->
+    <script>
+        window.currentUserPhotoBase64 = "";
+
+        function switchPage(pageNo) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            
+            document.getElementById('page' + pageNo).classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+            if(id === 'dropdownMenu') toggleDropdown();
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        function toggleDropdown() {
+            const menu = document.getElementById('dropdownMenu');
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function toggleDarkMode() {
+            const theme = document.body.getAttribute('data-theme');
+            document.body.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark');
+            toggleDropdown();
+        }
+
+        function handleRoleChange() {
+            const role = document.getElementById('regRole').value;
+            document.getElementById('studentFields').style.display = role === 'विद्यार्थी' ? 'block' : 'none';
+            document.getElementById('teacherFields').style.display = role === 'शिक्षक' ? 'block' : 'none';
+            document.getElementById('otherFields').style.display = role === 'इतर' ? 'block' : 'none';
+        }
+
+        function handleCourseChange() {
+            const course = document.getElementById('regClassCourse').value;
+            const yearGroup = document.getElementById('yearGroup');
+            yearGroup.style.display = (course === 'B.A' || course === 'B.Com' || course === 'B.Sc') ? 'block' : 'none';
+        }
+
+        function previewUserPhoto(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                window.currentUserPhotoBase64 = reader.result;
+            };
+            if(event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        }
+
+        function renderGroupLists() {
+            const members = JSON.parse(localStorage.getItem("allCampaignMembers") || "[]");
+            
+            const listA = document.getElementById("groupAList");
+            const listB = document.getElementById("groupBList");
+            const listC = document.getElementById("groupCList");
+            const listD = document.getElementById("groupDList");
+
+            listA.innerHTML = ""; listB.innerHTML = ""; listC.innerHTML = ""; listD.innerHTML = "";
+
+            members.forEach(m => {
+                let html = `<div class="member-item">
+                    <strong>${m.fullName}</strong>
+                    <span style="font-size:11px; color:var(--text-muted);">`;
+
+                if(m.assignedGroup === 'A') {
+                    html += `वर्ग: ${m.course} | रोल नंबर: ${m.rollNo || 'N/A'}</span></div>`;
+                    listA.innerHTML += html;
+                } else if(m.assignedGroup === 'B') {
+                    html += `अभ्यासक्रम: ${m.course} (${m.degreeYear}) | रोल: ${m.rollNo || 'N/A'}</span></div>`;
+                    listB.innerHTML += html;
+                } else if(m.assignedGroup === 'C') {
+                    html += `विषय: ${m.subject} | मो: ${m.phone}</span></div>`;
+                    listC.innerHTML += html;
+                } else if(m.assignedGroup === 'D') {
+                    html += `पद: ${m.otherRole || 'सहकारी'} | मो: ${m.phone}</span></div>`;
+                    listD.innerHTML += html;
+                }
+            });
+        }
+
+        function showMyGroup() {
+            toggleDropdown();
+            const user = JSON.parse(localStorage.getItem("currentUser") || "null");
+            if(!user) {
+                alert("कृपया आधी नोंदणी करा!");
+                openModal('registerModal');
+                return;
+            }
+            switchPage(2);
+            alert(`तुम्ही ${user.groupName} मध्ये समाविष्ट आहात.\nगटातून बाहेर पडण्यासाठी OK दाबा.`);
+            if(confirm("तुम्हाला या गटातून बाहेर पडायचे आहे का?")) {
+                let members = JSON.parse(localStorage.getItem("allCampaignMembers") || "[]");
+                members = members.filter(m => m.phone !== user.phone);
+                localStorage.setItem("allCampaignMembers", JSON.stringify(members));
+                localStorage.removeItem("currentUser");
+                alert("तुमचे नाव गटातून काढण्यात आले आहे.");
+                renderGroupLists();
+            }
+        }
+
+        function showMyIdCard() {
+            const user = JSON.parse(localStorage.getItem("currentUser") || "null");
+            if(!user) {
+                alert("कृपया आयडेंटी कार्ड पाहण्यासाठी आधी रजिस्ट्रेशन करा!");
+                openModal('registerModal');
+                return;
+            }
+
+            document.getElementById("idCardName").innerText = user.fullName;
+            document.getElementById("idCardBadgeRole").innerText = user.role;
+            document.getElementById("idCardGroup").innerText = "गट: " + user.groupName;
+            document.getElementById("idCardMobile").innerText = "मोबाईल: " + user.phone;
+            document.getElementById("idCardPhoto").src = user.photo;
+
+            if(user.role === 'विद्यार्थी') {
+                document.getElementById("idCardDetails").innerText = `वर्ग: ${user.course} ${user.degreeYear ? '('+user.degreeYear+')' : ''} | रोल: ${user.rollNo || '-'}`;
+            } else if(user.role === 'शिक्षक') {
+                document.getElementById("idCardDetails").innerText = `विषय: ${user.subject}`;
+            } else {
+                document.getElementById("idCardDetails").innerText = `पद: ${user.otherRole || 'समर्थक'}`;
+            }
+
+            openModal('idCardModal');
+        }
+
+        function downloadIDCard() {
+            const cardElem = document.getElementById("idCardCanvasWrap");
+            html2canvas(cardElem, { scale: 2 }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'Yuva_Shakti_ID_Card.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+
+        function submitComplaint() {
+            const txt = document.getElementById("complaintText").value.trim();
+            if(!txt) return alert("कृपया अडचण लिहा.");
+
+            let complaints = JSON.parse(localStorage.getItem("allComplaints") || "[]");
+            complaints.push(txt);
+            localStorage.setItem("allComplaints", JSON.stringify(complaints));
+
+            alert("तुमची अडचण यशस्वीरीत्या सबमिट झाली आहे.");
+            document.getElementById("complaintText").value = "";
+            closeModal('complaintModal');
+            loadAdminComplaints();
+        }
+
+        function addPhotoToGallery() {
+            const input = document.getElementById("galleryFileInput");
+            if(input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const grid = document.getElementById("photoGalleryGrid");
+                    grid.innerHTML += `<div class="gallery-item"><img src="${e.target.result}" alt="[नवीन फोटो]"></div>`;
+                    closeModal('addPhotoModal');
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function searchBooksList() {
+            const query = document.getElementById("modalSearchInput").value.toLowerCase();
+            const items = document.querySelectorAll("#booksList .member-item");
+            items.forEach(it => {
+                it.style.display = it.innerText.toLowerCase().includes(query) ? "block" : "none";
+            });
+        }
+
+        /* Admin Controls */
+        function updateAdminTitle() {
+            const t = document.getElementById("adminTitleInput").value.trim();
+            if(t) {
+                document.getElementById("schoolNameText").innerText = t;
+                alert("टायटल अपडेट झाले!");
+            }
+        }
+
+        function addAdminNotice() {
+            const n = document.getElementById("adminUpdateInput").value.trim();
+            if(n) {
+                document.getElementById("updatesList").innerHTML += `<div class="member-item">📌 <strong>नवीन अपडेट:</strong> ${n}</div>`;
+                alert("सूचना प्रसिद्ध झाली!");
+                document.getElementById("adminUpdateInput").value = "";
+            }
+        }
+
+        function exportMembersCSV() {
+            const members = JSON.parse(localStorage.getItem("allCampaignMembers") || "[]");
+            let csv = "Name,Role,Group,Phone,Course/Subject\n";
+            members.forEach(m => {
+                csv += `"${m.fullName}","${m.role}","${m.assignedGroup}","${m.phone}","${m.course || m.subject || ''}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Campaign_Members.csv';
+            a.click();
+        }
+
+        function loadAdminComplaints() {
+            const complaints = JSON.parse(localStorage.getItem("allComplaints") || "[]");
+            const box = document.getElementById("adminComplaintsList");
+            if(complaints.length === 0) {
+                box.innerText = "अद्याप कोणतीही तक्रार नाही.";
+            } else {
+                box.innerHTML = complaints.map(c => `<div>• ${c}</div>`).join('');
+            }
+        }
+
+        function declareCampaignCompleted() {
+            const title = document.getElementById("adminCompleteTitle").value.trim() || "🎉 मोहीम यशस्वीरीत्या पूर्ण झाली!";
+            const photoInput = document.getElementById("adminCompletePhoto");
+            
+            document.getElementById("completedTitleText").innerText = title;
+            const banner = document.getElementById("campaignCompletedBanner");
+            banner.style.display = "block";
+
+            if(photoInput.files && photoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById("completedPhotoDisplay");
+                    img.src = e.target.result;
+                    img.style.display = "block";
+                };
+                reader.readAsDataURL(photoInput.files[0]);
+            }
+
+            closeModal('adminModal');
+            confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+            alert("बधाई! मोहीम पूर्ण घोषित झाली आहे.");
+        }
+    </script>
+</body>
+</html>
+
+```
