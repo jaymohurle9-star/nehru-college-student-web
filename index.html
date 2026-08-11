@@ -770,7 +770,7 @@
     
     <!-- 👇 इथे जुन्या पॅराग्राफच्या जागी हा कोड टाका -->
     <p id="heroCampaignDesc">
-        नेहरू शिक्षण संस्था संचलित महाविद्यालय नेर-परसोपंत येथे <strong>शहीद भगतसिंग, शिवराम राजगुरू आणि सुखदेव</strong> या त्रिमूर्तींचे स्मारक व पूर्णकृती मूर्ती स्थापन करणे हा या मोहिमेचा मुख्य उद्देश आहे. महाविद्यालयाचे प्राचार्य, कार्यकारणी मंडळ व शासनाकडून आवश्यक परवानगी व जागा मिळवून भव्य मूर्ती स्थापन करण्यासाठी सर्व विद्यार्थी, शिक्षक व कर्मचाऱ्यांनी संघटित होण्याचे हे पाऊल आहे.
+        नेहरू शिक्षण संस्था संचलित महाविद्यालय नेर-परसोपंत येथे <strong>शहीद भगतसिंग, शिवराम राजगुरू आणि सुखदेव</strong> या त्रिमूर्तींच्या मुर्ती पन करणे हा या मोहिमेचा मुख्य उद्देश आहे. महाविद्यालयाचे प्राचार्य, कार्यकारणी मंडळ व शासनाकडून आवश्यक परवानगी व जागा मिळवून भव्य मूर्ती स्थापन करण्यासाठी सर्व विद्यार्थी, शिक्षक व कर्मचाऱ्यांनी संघटित होण्याचे हे पाऊल आहे.
     </p>
 
     <button class="btn-saffron" style="margin: 0 auto;" onclick="openModal('registerModal')"><i class="fa-solid fa-flag"></i> युवाशक्तीला जोडा (मोहिमेत सहभागी व्हा)</button>
@@ -1830,20 +1830,17 @@ window.verifyOTP = function() {
         }
     let targetImageElement = null;
 
-// १. वेबसाईटवरच्या सर्व फोटोंवर क्लिक - फिचर चालू करणे
-function enableClickToEditImages() {
-    // सिंगल फाईल मधील सर्व <img> टॅग्स शोधणे
-    const allImages = document.querySelectorAll("img");
+let targetImageElement = null;
 
+function enableClickToEditImages() {
+    const allImages = document.querySelectorAll("img");
     allImages.forEach((img, index) => {
         if (!img.id) {
             img.id = "single_page_img_" + index;
         }
-
         img.style.cursor = "pointer";
         img.title = "फोटो बदलण्यासाठी इथे क्लिक करा";
 
-        // फोटोवर क्लिक केल्यावर गॅलरी उघडणे
         img.onclick = function () {
             targetImageElement = this;
             document.getElementById("adminImageUploader").click();
@@ -1851,31 +1848,56 @@ function enableClickToEditImages() {
     });
 }
 
-// २. गॅलरीतून निवडलेला फोटो स्क्रीनवर व मेमरीमध्ये अपडेट करणे
+// फोटोची साईझ लहान करून मेमरी एरर टाळणारे फंक्शन (Image Compressor)
 function handleImageChange(event) {
     const file = event.target.files[0];
     if (file && targetImageElement) {
         const reader = new FileReader();
 
         reader.onload = function (e) {
-            const newImageBase64 = e.target.result;
-            
-            // अ) स्क्रीनवर फोटो लगेच बदलेल
-            targetImageElement.src = newImageBase64;
+            const img = new Image();
+            img.src = e.target.result;
 
-            // ब) मोबाईलच्या ब्राऊजर मेमरीमध्ये (LocalStorage) सेव्ह होईल
-            // (वेबसाईट रिफ्रेश केली तरी हाच फोटो राहील)
-            const imgKey = "saved_img_" + targetImageElement.id;
-            localStorage.setItem(imgKey, newImageBase64);
+            img.onload = function () {
+                // कॅनव्हास वापरून फोटोची साईझ लहान करणे
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
 
-            alert("फोटो यशस्वीरीत्या बदलला गेला आहे! 🎉");
+                // मॅक्स साईझ ८००px ठेवणे (ज्याने मेमरी क्रॅश होणार नाही)
+                const maxWidth = 800;
+                let width = img.width;
+                let height = img.height;
+
+                if (width > maxWidth) {
+                    height = Math.round((height * maxWidth) / width);
+                    width = maxWidth;
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                ctx.drawImage(img, 0, 0, width, height);
+
+                // फोटो कॉम्प्रेस करून (0.7 quality) Base64 मिळवणे
+                const compressedBase64 = canvas.toDataURL("image/jpeg", 0.7);
+
+                // १. स्क्रीनवर फोटो अपडेट करा
+                targetImageElement.src = compressedBase64;
+
+                // २. LocalStorage मध्ये सेव्ह करा (Safe Size)
+                try {
+                    const imgKey = "saved_img_" + targetImageElement.id;
+                    localStorage.setItem(imgKey, compressedBase64);
+                    alert("फोटो यशस्वीरीत्या सेव्ह झाला! 🎉");
+                } catch (err) {
+                    alert("फोटो कॉम्प्रेस केला आहे पण स्टोरेज फुल झाले आहे.");
+                }
+            };
         };
 
         reader.readAsDataURL(file);
     }
 }
 
-// ३. वेबसाईट उघडल्यावर आधी बदललेले फोटो दाखवणे
 function loadSavedImages() {
     const allImages = document.querySelectorAll("img");
     allImages.forEach((img) => {
@@ -1887,12 +1909,11 @@ function loadSavedImages() {
     });
 }
 
-// ४. सिंगल पेज लोड होताच हे दोन्ही कोड आपोआप रन होतील
 window.addEventListener("DOMContentLoaded", () => {
     loadSavedImages();
     enableClickToEditImages();
 });
-                </script>
+    </script>
 <!-- मोबाईल गॅलरी उघडण्यासाठी -->
 <input type="file" id="adminImageUploader" accept="image/*" style="display: none;" onchange="handleImageChange(event)">
 </body>
