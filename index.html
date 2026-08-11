@@ -1820,7 +1820,73 @@ window.verifyOTP = function() {
             confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
             alert("बधाई! मोहीम पूर्ण घोषित झाली आहे.");
         }
-    </script>
+    let targetImageElement = null;
+
+// १. वेबसाईटवरच्या सर्व फोटोंवर क्लिक - फिचर चालू करणे
+function enableClickToEditImages() {
+    // सिंगल फाईल मधील सर्व <img> टॅग्स शोधणे
+    const allImages = document.querySelectorAll("img");
+
+    allImages.forEach((img, index) => {
+        if (!img.id) {
+            img.id = "single_page_img_" + index;
+        }
+
+        img.style.cursor = "pointer";
+        img.title = "फोटो बदलण्यासाठी इथे क्लिक करा";
+
+        // फोटोवर क्लिक केल्यावर गॅलरी उघडणे
+        img.onclick = function () {
+            targetImageElement = this;
+            document.getElementById("adminImageUploader").click();
+        };
+    });
+}
+
+// २. गॅलरीतून निवडलेला फोटो स्क्रीनवर व मेमरीमध्ये अपडेट करणे
+function handleImageChange(event) {
+    const file = event.target.files[0];
+    if (file && targetImageElement) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            const newImageBase64 = e.target.result;
+            
+            // अ) स्क्रीनवर फोटो लगेच बदलेल
+            targetImageElement.src = newImageBase64;
+
+            // ब) मोबाईलच्या ब्राऊजर मेमरीमध्ये (LocalStorage) सेव्ह होईल
+            // (वेबसाईट रिफ्रेश केली तरी हाच फोटो राहील)
+            const imgKey = "saved_img_" + targetImageElement.id;
+            localStorage.setItem(imgKey, newImageBase64);
+
+            alert("फोटो यशस्वीरीत्या बदलला गेला आहे! 🎉");
+        };
+
+        reader.readAsDataURL(file);
+    }
+}
+
+// ३. वेबसाईट उघडल्यावर आधी बदललेले फोटो दाखवणे
+function loadSavedImages() {
+    const allImages = document.querySelectorAll("img");
+    allImages.forEach((img) => {
+        const imgKey = "saved_img_" + img.id;
+        const savedSrc = localStorage.getItem(imgKey);
+        if (savedSrc) {
+            img.src = savedSrc;
+        }
+    });
+}
+
+// ४. सिंगल पेज लोड होताच हे दोन्ही कोड आपोआप रन होतील
+window.addEventListener("DOMContentLoaded", () => {
+    loadSavedImages();
+    enableClickToEditImages();
+});
+                </script>
+<!-- मोबाईल गॅलरी उघडण्यासाठी -->
+<input type="file" id="adminImageUploader" accept="image/*" style="display: none;" onchange="handleImageChange(event)">
 </body>
 </html>
 
